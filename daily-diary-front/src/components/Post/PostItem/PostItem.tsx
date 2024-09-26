@@ -20,12 +20,12 @@ import { convertDateToFormat } from "../../../utils/utils";
 interface PostItemProps {
     post: Post;
     updatePost: (id: string, updatedData: { title: string; body: string }) => void;
-    deletePost: (id: string) => void;
+    deletePost: (id: string) => void;  
 }
  
 const currentUser = {
-    uid: localStorage.getItem('uid') === null ? 0 : parseInt(localStorage.getItem('uid') as string, 10),
-    uname: localStorage.getItem('uname') || '' 
+    uid: sessionStorage.getItem('uid') === null ? 0 : parseInt(sessionStorage.getItem('uid') as string, 10),
+    uname: sessionStorage.getItem('uname') || '' 
 }
 
 export default function PostItem({ post, updatePost, deletePost }: PostItemProps) {
@@ -65,7 +65,7 @@ export default function PostItem({ post, updatePost, deletePost }: PostItemProps
                 subheader={
                     `${isToday(searchDate)
                         ? "Today"
-                        : convertDateToFormat(new Date(searchDate), "MMMM dd, yyyy")}`
+                        : convertDateToFormat(new Date(searchDate), "MMMM dd, yyyy")} - written by ${post.user.uname}`
                 }
             />
             <CardMedia
@@ -110,7 +110,8 @@ export default function PostItem({ post, updatePost, deletePost }: PostItemProps
             </CardContent>
             <CardActions disableSpacing sx={{ justifyContent: "space-between" }}>
                 <Votes post={post} /> {/* Voting component stays left-aligned */}
-                {!isEditing && currentUser.uid === post.user.uid && (
+                {/* {sessionStorage.getItem('uid') === null ? 0 : parseInt(sessionStorage.getItem('uid') as string, 10) }  */}
+                {!isEditing && sessionStorage.getItem('uid') === null ? 0 : parseInt(sessionStorage.getItem('uid') as string, 10) === post.user.uid && (
                     <div>
                         <Button onClick={handleEditClick} variant="outlined" sx={{ ml: 2 }}>
                             Edit

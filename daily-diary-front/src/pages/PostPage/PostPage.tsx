@@ -66,7 +66,7 @@ export default function PostPage() {
                 isToday(searchDate)
                     ? "Today"
                     : convertDateToFormat(searchDate, "MMMM dd, yyyy")
-            }) - Current User: ${localStorage.getItem('uname') ? localStorage.getItem('uname') : ''}`}
+            }) - Current User: ${sessionStorage.getItem('uname') ? sessionStorage.getItem('uname') : ''}`}
              />
                 <CardContent>
                     <DateButtonGroup />

@@ -45,10 +45,10 @@ const Login = ({ onLogin } :LoginProps) => {
 
     
       if (user) {     
-        localStorage.setItem('isAuthenticated', 'true');
-        localStorage.setItem('loggedInUser', JSON.stringify(user));
-        localStorage.setItem('uname',user.username)
-        localStorage.setItem('uid',user.uid.toString())
+        sessionStorage.setItem('isAuthenticated', 'true');
+        sessionStorage.setItem('loggedInUser', JSON.stringify(user));
+        sessionStorage.setItem('uname',user.username)
+        sessionStorage.setItem('uid',user.uid.toString())
 
         onLogin(user);
       } else {
